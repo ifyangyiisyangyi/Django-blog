@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+
+    <!-- Bootstrap and font-awesome CSS -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" rel="external nofollow"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js" rel="external nofollow"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<!--    <script src="https://cdn.bootcss.com/bootstrap/4.3.1/js/bootstrap.min.js" rel="external nofollow"></script>-->
+    <!-- blog CSS -->
+    <link href="{% static '/blog/css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+<!--导航开始-->
+{% include 'blog/tags/navbar.html' %}
+<!--导航结束-->
+<main>{% block base_content %}{% endblock %}</main>
+<footer class="container-fluid mt-4 py-0">
+    <!--    card-body里由"px-0 f-14"改为“p-0”,去除间距-->
+    <div class="card-body text-center px-0 f-14">
+        <p class="card-text mb-1">Copyright&nbsp;&copy;&nbsp;<span></span>
+            <a href="https://github.com/ifyangyiisyangyi/learnPython" target="_blank" title="博客作者的Github">ifyangyiisyangyi</a>.&nbsp;Powered&nbsp;by&nbsp;Django.
+        </p>
+        <p class="mb-0">
+            <a href="http://beian.miit.gov.cn/" target="_blank">京ICP备2020034426号-1</a>&nbsp;
+            <span id="webtime"></span>
+        </p>
+    </div>
+</footer>
+<script src="{% static 'blog/js/base.js' %}" rel="stylesheet"></script>
+</body>
