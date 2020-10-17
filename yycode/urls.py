@@ -5,7 +5,6 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', login, name='home'),
     path('', include('blog.urls')),
 
     path('save_message/', views.save_message, name='save_message'),
