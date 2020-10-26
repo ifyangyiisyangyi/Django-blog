@@ -3,5 +3,4 @@
 </p>
 
 # Django-blog
-
 Django+bootstrap
