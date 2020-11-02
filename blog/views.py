@@ -37,19 +37,25 @@ class DetailView(generic.DetailView):
         obj = super(DetailView, self).get_object()
         # 设置浏览量增加时间判断,同一篇文章两次浏览超过半小时才重新统计阅览量,作者浏览忽略
         u = self.request.user
+        print(f'当前访问者 : {u}')
         ses = self.request.session
+        print(f'ses : {ses}')
         the_key = 'is_read_{}'.format(obj.id)
+        print(f'the_key : {the_key}')
         is_read_time = ses.get(the_key)
+        print(f'is_read_time: {is_read_time}')
         if u != obj.author:
             if not is_read_time:
                 obj.update_views()
                 ses[the_key] = time.time()
+                print('+1')
             else:
                 now_time = time.time()
                 t = now_time - is_read_time
                 if t > 60 * 30:
                     obj.update_views()
                     ses[the_key] = time.time()
+                    print('超过半小时，阅读数+1')
         # 获取文章更新的时间，判断是否从缓存中取文章的markdown,可以避免每次都转换
         ud = obj.update_date.strftime("%Y%m%d%H%M%S")
         md_key = '{}_md_{}'.format(obj.id, ud)
