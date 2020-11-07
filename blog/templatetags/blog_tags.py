@@ -11,7 +11,7 @@ register = template.Library()
 
 # 文章相关标签函数
 @register.simple_tag
-def get_article_list(sort=None, num=None):
+def get_article_list(sort=None, num=3):
     '''获取指定排序方式和指定数量的文章'''
     if sort:
         if num:

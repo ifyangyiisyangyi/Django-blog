@@ -21,7 +21,7 @@ class IndexView(generic.ListView):
     paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
 
     def get_ordering(self):
-        save_visitor(self.request)
+        save_visitor(self.request)  # 保存访问者ip
         sort = self.kwargs.get('sort')
         if sort == 'v':
             return ('-views', '-update_date', '-id')
@@ -125,6 +125,9 @@ class TagView(generic.ListView):
 
 
 def save_visitor(request):
+    '''
+    保存访问者ip
+    '''
     try:
         if 'HTTP_X_FORWARDED_FOR' in request.META:
             ip = request.META['HTTP_X_FORWARDED_FOR']
