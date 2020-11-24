@@ -45,8 +45,8 @@ def login(request):
         except:
             print("获取ip信息异常")
         try:
-            visitor = Vistor(ip=ip, user_agent=user_agent, country=country, city=city, ip_as=ip_as, isp=isp)
-            visitor.save()
+            vistor = Vistor(ip=ip, user_agent=user_agent, country=country, city=city, ip_as=ip_as, isp=isp)
+            vistor.save()
             # send_mail(f'访问者IP:{ip}', f'访问者地址:{city}', '117645743@qq.com', ['937471204@qq.com'])
         except:
             print("写入数据异常")

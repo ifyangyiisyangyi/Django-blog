@@ -1,6 +1,7 @@
 import time
 
 import markdown
+import requests
 from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import get_object_or_404
@@ -135,7 +136,26 @@ def save_visitor(request):
             ip = request.META['HTTP_X_FORWARDED_FOR']
         else:
             ip = request.META['REMOTE_ADDR']
-        vistor = Vistor(ip=ip, count=1)
-        vistor.save()
+        if ip == '127.0.0.1':
+            print("本地请求")
+        else:
+            url = f"http://www.ip-api.com/json/{ip}?lang=zh-CN"
+            res = requests.get(url)
+            ip_message = res.json()
+            if "HTTP_USER_AGENT" in request.META:
+                user_agent = request.META['HTTP_USER_AGENT']
+            else:
+                user_agent = ""
+            if ip_message.get('status') == 'success':
+                country = ip_message.get('country')
+                city = ip_message.get('city')
+                ip_as = ip_message.get('as')
+                isp = ip_message.get('isp')
+            elif ip_message.get('status') == 'fail':
+                print("请求失败")
+            else:
+                pass
+            vistor = Vistor(ip=ip, user_agent=user_agent, count=1, country=country, city=city, ip_as=ip_as, isp=isp)
+            vistor.save()
     except:
         print("保存ip失败！")
