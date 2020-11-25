@@ -20,9 +20,11 @@ def update_vistor():
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         res = requests.get(url)
         ip_message = res.json()
+        print(ip_message)
         try:
             if ip_message.get('status') == 'success':
                 i.country = ip_message.get('country')
+                print(i.country)
                 i.city = ip_message.get('city')
                 i.ip_as = ip_message.get('as')
                 i.isp = ip_message.get('isp')
