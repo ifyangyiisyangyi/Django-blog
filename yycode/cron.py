@@ -19,7 +19,7 @@ def update_vistor():
         print(f'ip为 : {i.ip}')
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         try:
-            res = requests.get(url)
+            res = requests.get(url, timeout=0.01)
             ip_message = res.json()
             print(ip_message)
             # now = time.strftime()  # todo 加了时间后会报错
