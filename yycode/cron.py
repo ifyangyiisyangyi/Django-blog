@@ -13,6 +13,7 @@ def send_email():
 # 更新访问者信息
 def update_vistor():
     vistor_list = Vistor.objects.filter(count=1, country='')
+    print(vistor_list[0])
     for i in vistor_list:
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         try:
@@ -25,6 +26,9 @@ def update_vistor():
                 i.isp = ip_message.get('isp')
             elif ip_message.get('status') == 'fail':
                 print("请求失败")
+            else:
+                pass
             i.save()
+
         except:
             print("更新失败")
