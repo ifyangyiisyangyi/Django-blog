@@ -15,6 +15,7 @@ def update_vistor():
     vistor_list = Vistor.objects.filter(count=1, country='')
     print(vistor_list[0])
     for i in vistor_list:
+        print(f'ip为{i.ip}')
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         try:
             res = requests.get(url)
