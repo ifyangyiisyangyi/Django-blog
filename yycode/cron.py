@@ -15,7 +15,7 @@ def update_vistor():
     vistor_list = Vistor.objects.filter(count=1, country='')
     print(vistor_list[0])
     for i in vistor_list:
-        print(f'ip为{i.ip}')
+        print(f'ip为 : {i.ip}')
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         try:
             res = requests.get(url)
@@ -25,11 +25,10 @@ def update_vistor():
                 i.city = ip_message.get('city')
                 i.ip_as = ip_message.get('as')
                 i.isp = ip_message.get('isp')
+                i.save()
             elif ip_message.get('status') == 'fail':
                 print("请求失败")
             else:
                 pass
-            i.save()
-
         except:
             print("更新失败")
