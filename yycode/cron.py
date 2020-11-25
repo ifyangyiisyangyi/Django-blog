@@ -22,7 +22,7 @@ def update_vistor():
         ip_message = res.json()
         print(ip_message)
         try:
-            time = time.strftime()
+            now = time.strftime()
             if ip_message.get('status') == 'success':
                 i.country = ip_message.get('country')
                 print(i.country)
@@ -34,7 +34,7 @@ def update_vistor():
                 print(i.isp)
                 print("获取访问者信息成功")
                 i.save()
-                print(f"保存耗时{time.strftime() - time}")
+                print(f"保存耗时{time.strftime() - now}")
             elif ip_message.get('status') == 'fail':
                 print("请求失败")
             else:
