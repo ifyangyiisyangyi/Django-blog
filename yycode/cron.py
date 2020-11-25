@@ -20,14 +20,20 @@ def update_vistor():
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
         res = requests.get(url)
         ip_message = res.json()
-        if ip_message.get('status') == 'success':
-            i.country = ip_message.get('country')
-            i.city = ip_message.get('city')
-            i.ip_as = ip_message.get('as')
-            i.isp = ip_message.get('isp')
-            time.sleep(1)
-            i.save()
-        elif ip_message.get('status') == 'fail':
-            print("请求失败")
-        else:
-            print("更新失败")
+        try:
+            if ip_message.get('status') == 'success':
+                i.country = ip_message.get('country')
+                i.city = ip_message.get('city')
+                i.ip_as = ip_message.get('as')
+                i.isp = ip_message.get('isp')
+                # time.sleep(1)
+                time = time.strftime()
+                print("获取访问者信息成功")
+                i.save()
+                print(f"保存耗时{time.strftime() - time}")
+            elif ip_message.get('status') == 'fail':
+                print("请求失败")
+            else:
+                print("更新失败")
+        except:
+            print("未知异常")
