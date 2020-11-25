@@ -22,14 +22,16 @@ def update_vistor():
         ip_message = res.json()
         print(ip_message)
         try:
+            time = time.strftime()
             if ip_message.get('status') == 'success':
                 i.country = ip_message.get('country')
                 print(i.country)
                 i.city = ip_message.get('city')
+                print(i.city)
                 i.ip_as = ip_message.get('as')
+                print(i.ip_as)
                 i.isp = ip_message.get('isp')
-                # time.sleep(1)
-                time = time.strftime()
+                print(i.isp)
                 print("获取访问者信息成功")
                 i.save()
                 print(f"保存耗时{time.strftime() - time}")
