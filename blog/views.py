@@ -1,15 +1,10 @@
 import time
-
 import markdown
-import requests
 from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import get_object_or_404
-
-# Create your views here.
 from django.views import generic
 from markdown.extensions.toc import TocExtension, slugify
-
 from TestModel.models import Vistor
 from blog.models import Article, Category, Tag
 from yycode.settings import NEVER_REDIS_TIMEOUT
@@ -23,7 +18,7 @@ class IndexView(generic.ListView):
     paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
 
     def get_ordering(self):
-        save_visitor(self.request)  # 保存访问者ip
+        save_vistor(self.request)  # 保存访问者ip
         sort = self.kwargs.get('sort')
         if sort == 'v':
             return ('-views', '-update_date', '-id')
@@ -127,7 +122,7 @@ class TagView(generic.ListView):
         return context_data
 
 
-def save_visitor(request):
+def save_vistor(request):
     '''
     保存访问者ip
     '''

@@ -15,7 +15,7 @@ class Cbvdemo(View):
         self.context['msg'] = '这是Cbvdemo get请求'
         return JsonResponse(self.context)
 
-    def pose(self, request):
+    def post(self, request):
         self.context['msg'] = '这是Cbvdemo post请求'
         return JsonResponse(self.context)
 

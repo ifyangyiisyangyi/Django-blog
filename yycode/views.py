@@ -32,7 +32,6 @@ def login(request):
                 user_agent = request.META['HTTP_USER_AGENT']
             else:
                 user_agent = ""
-
             if ip_message.get('status') == 'success':
                 country = ip_message.get('country')
                 city = ip_message.get('city')
