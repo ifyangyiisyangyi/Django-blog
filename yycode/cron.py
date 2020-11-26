@@ -14,7 +14,7 @@ def send_email():
 
 # 更新访问者信息
 def update_vistor():
-    vistor_list = Vistor.objects.filter(count=1, country='')
+    vistor_list = Vistor.objects.filter(count=3, country='')
     for i in vistor_list:
         print(f'ip为 : {i.ip}')
         url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
