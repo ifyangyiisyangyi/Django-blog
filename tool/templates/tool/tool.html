@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load static %}
+{% load blog_tags tool_tags%}
 
 {% block head_title %}在线工具，提升工作效率{% endblock %}
 {% block metas %}
@@ -15,7 +16,10 @@
 {% block base_content %}
 <div class="container">
     <div class="row tool-list">
-        qqqq
+        {% get_toollist_by_key as tool_list %}
+        {% for tool_item in tool_list %}
+        {% load_tool_item tool_item %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
