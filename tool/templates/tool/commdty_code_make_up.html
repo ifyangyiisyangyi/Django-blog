@@ -3,8 +3,8 @@
 
 {% block head_title %}商品编码补齐{% endblock %}
 {% block metas %}
-    <meta name="description" content="商品编码补齐">
-    <meta name="keywords" content="商品编码补齐">
+<meta name="description" content="商品编码补齐">
+<meta name="keywords" content="商品编码补齐">
 {% endblock %}
 
 {% block tool_name %}商品编码补齐{% endblock %}
@@ -17,18 +17,27 @@
                required>
         <small class="form-text text-muted">注：自动将商品编码补齐为18位</small>
     </div>
-    <button type="button" class="btn btn-info btn-sm rounded-0" id = 'commdty_code' onclick="fun()">点击补齐</button>
+    <button type="button" class="btn btn-info btn-sm rounded-0" id='commdty_code' onclick="fun()">点击补齐</button>
 </div>
 <div class="card mb-0 rounded-0">
     <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
-    <div class="card-body table-responsive push-result text-center p-2"><div id="myDiv">结果显示区</div></div>
+    <div class="card-body table-responsive push-result text-center p-2">
+        <div id="myDiv">结果显示区</div>
+    </div>
 </div>
 <script>
 function fun() {
     var res = document.getElementById("name")
     var commdty_code = res.value
-    document.getElementById("myDiv").innerHTML= "000000000" + commdty_code;
+    var len = commdty_code.toString().length;
+    while(len < 18){
+        commdty_code = '0' + commdty_code;
+        len++;
+    }
+    document.getElementById("myDiv").innerHTML= commdty_code;
 }
+
+
 </script>
 {% endblock %}
 
