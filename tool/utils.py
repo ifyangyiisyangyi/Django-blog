@@ -15,10 +15,10 @@ IZONE_TOOLS = {
                 'desc': '自动补齐18位商品编码'
             },
             {
-                'name': '计算分库分表',
+                'name': '计算分表',
                 'url': 'tool:sub_table',
                 'img': 'editor/images/logos/map.png',
-                'desc': '计算分库分表'
+                'desc': '根据会员编码计算分表'
             }
         ]
     }
