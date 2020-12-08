@@ -13,6 +13,12 @@ IZONE_TOOLS = {
                 'url': 'tool:commdty_code_make_up',
                 'img': 'editor/images/logos/regex.png',
                 'desc': '自动补齐18位商品编码'
+            },
+            {
+                'name': '计算分库分表',
+                'url': 'tool:sub_table',
+                'img': 'editor/images/logos/sub_tablel.png',
+                'desc': '计算分库分表'
             }
         ]
     }

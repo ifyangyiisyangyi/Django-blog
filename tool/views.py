@@ -26,3 +26,6 @@ class Cbvdemo(View):
 def commdty_code_make_up(request):
     return render(request, 'tool/commdty_code_make_up.html')
 
+
+def sub_table(request):
+    return render(request, 'tool/sub_table.html')
