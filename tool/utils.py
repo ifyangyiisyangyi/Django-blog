@@ -17,7 +17,7 @@ IZONE_TOOLS = {
             {
                 'name': '计算分库分表',
                 'url': 'tool:sub_table',
-                'img': 'editor/images/logos/sub_tablel.png',
+                'img': 'editor/images/logos/map.png',
                 'desc': '计算分库分表'
             }
         ]
