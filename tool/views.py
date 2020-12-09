@@ -24,8 +24,21 @@ class Cbvdemo(View):
 
 
 def commdty_code_make_up(request):
+    '''
+    商品编码补齐
+    '''
     return render(request, 'tool/commdty_code_make_up.html')
 
 
 def sub_table(request):
+    '''
+    查询分表
+    '''
     return render(request, 'tool/sub_table.html')
+
+
+def mock(request):
+    '''
+    在线mock工具
+    '''
+    return render(request, 'tool/mock.html')

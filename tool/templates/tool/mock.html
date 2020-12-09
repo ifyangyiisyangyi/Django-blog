@@ -1,0 +1,19 @@
+{% extends "tool/base_tool.html" %}
+
+{% block tool_name %}在线mock工具{% endblock %}
+
+{% block left_content %}
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <label for="mockUrl">mock url</label>
+            <textarea type="text" class="form-control" rows="1" id="mockUrl" placeholder="以/开始"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="mockResponse">mock response</label>
+            <textarea type="text" class="form-control" rows="10" id="mockResponse" placeholder="接口返回值"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Mock</button>
+    </form>
+</div>
+{% endblock %}

@@ -19,6 +19,12 @@ IZONE_TOOLS = {
                 'url': 'tool:sub_table',
                 'img': 'editor/images/logos/map.png',
                 'desc': '根据会员编码计算分表'
+            },
+            {
+                'name': 'mock',
+                'url': 'tool:mock',
+                'img': 'editor/images/logos/mock.png',
+                'desc': '在线mock工具'
             }
         ]
     }
