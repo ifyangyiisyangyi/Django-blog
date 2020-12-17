@@ -8,7 +8,7 @@ from TestModel.models import Vistor
 
 def send_email():
     res = send_mail('打卡提醒助手', "忙碌工作了一天，下班记得打卡哦~", '117645743@qq.com',
-                    ['ifyangyiisyangyi@163.com'])
+                    ['ifyangyiisyangyi@163.com', '937471204@qq.com'])
     print(res)
 
 
