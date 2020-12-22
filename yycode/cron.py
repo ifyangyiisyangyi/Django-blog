@@ -1,11 +1,6 @@
-import time
-
 import requests
 from django.core.mail import send_mail
-
 from TestModel.models import Vistor
-from yycode.views import get_user_ip
-
 
 def send_email():
     res = send_mail('打卡提醒助手', "记得打卡哦~", '117645743@qq.com',
@@ -14,9 +9,8 @@ def send_email():
 
 
 def send_weather():
-    ip = get_user_ip()
-    weather_url = f'https://tianqiapi.com/api?version=v6&ip={ip}&appid=62884591&appsecret=RktG3jTx'
-    weather = requests.get(weather_url).json()
+    weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
+    weather = requests.get(weather_url, timeout=5).json()
     city = weather['city']  # 城市
     wea = weather['wea']  # 天气情况
     tem = weather['tem']  # 平均气温
@@ -45,7 +39,7 @@ def send_weather():
         </body>
         </html>
         '''
-    send_mail('打卡提醒', 'message', '117645743@qq.com', ['937471204@qq.com'], fail_silently=False, html_message=h)
+    send_mail('打卡提醒', 'message', '117645743@qq.com', ['937471204@qq.com', '506039913@qq.com'], fail_silently=False, html_message=h)
 
 
 # 更新访问者信息
