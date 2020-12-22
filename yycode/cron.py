@@ -4,6 +4,7 @@ import requests
 from django.core.mail import send_mail
 
 from TestModel.models import Vistor
+from yycode.views import get_user_ip
 
 
 def send_email():
@@ -13,7 +14,8 @@ def send_email():
 
 
 def send_weather():
-    weather_url = 'https://tianqiapi.com/api?version=v6&appid=62884591&appsecret=RktG3jTx'
+    ip = get_user_ip()
+    weather_url = f'https://tianqiapi.com/api?version=v6&ip={ip}&appid=62884591&appsecret=RktG3jTx'
     weather = requests.get(weather_url).json()
     city = weather['city']  # 城市
     wea = weather['wea']  # 天气情况
