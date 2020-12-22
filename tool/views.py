@@ -41,7 +41,7 @@ def mock(request):
     '''
     在线mock工具
     '''
-    print(f'**********   {request.method}   **********')
-    if request.method == 'POST':
-        return render(request, 'tool/mock.html', context={'mockUrl': 'xxx/xxx'})
+    # print(f'**********   {request.method}   **********')
+    # if request.method == 'POST':
+    #     return render(request, 'tool/mock.html', context={'mockUrl': 'xxx/xxx'})
     return render(request, 'tool/mock.html')

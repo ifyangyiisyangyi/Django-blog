@@ -4,24 +4,34 @@
 
 {% block left_content %}
 <div class="container-fluid">
-    <form action="" method="post">
-        <div class="form-group">
-<!--            <label for="mockUrl">mock url</label>-->
-            <div class="card-header text-center text-info font-weight-bold py-2">mock url</div>
-            <textarea type="text" class="form-control" rows="1" id="mockUrl" placeholder="以/开始"></textarea>
+    <div class="form-group">
+        <div class="card-header text-center text-info font-weight-bold py-2">mock url</div>
+        <input type="text" class="form-control" rows="1" id="mockUrl" placeholder="以/开始" required>
+    </div>
+    <div class="form-group">
+        <div class="card-header text-center text-info font-weight-bold py-2">mock response</div>
+        <textarea type="text" class="form-control" rows="5" id="mockResponse" placeholder="接口返回值"></textarea>
+    </div>
+    <button type="submit" class="btn btn-info btn-sm rounded-0" id="mock" onclick="mockFun()">Mock</button>
+    <div class="card mb-0 rounded-0">
+        <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
+        <div class="card-body table-responsive push-result text-center p-2">
+            <textarea type="text" class="form-control" disabled="disabled" rows="5" placeholder="结果显示区"
+                      id="res"></textarea>
         </div>
-        <div class="form-group">
-<!--            <label for="mockResponse">mock response</label>-->
-            <div class="card-header text-center text-info font-weight-bold py-2">mock response</div>
-            <textarea type="text" class="form-control" rows="5" id="mockResponse" placeholder="接口返回值"></textarea>
-        </div>
-        <button type="submit" class="btn btn-info btn-sm rounded-0">Mock</button>
-        <div class="card mb-0 rounded-0">
-            <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
-            <div class="card-body table-responsive push-result text-center p-2">
-                <textarea type="text" class="form-control" disabled="disabled" rows="5" placeholder="结果显示区">{{ mockUrl }}</textarea>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
+
+<script>
+    function mockFun() {
+        var mockUrl = document.getElementById('mockUrl').value
+        var mockResponse = document.getElementById("mockResponse").value
+        console.log(mockResponse)
+        console.log(mockUrl)
+        document.getElementById('res').innerHTML = mockUrl
+    }
+
+
+
+</script>
 {% endblock %}
