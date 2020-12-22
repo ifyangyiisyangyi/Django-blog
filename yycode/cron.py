@@ -12,6 +12,40 @@ def send_email():
     print(res)
 
 
+def send_weather():
+    weather_url = 'https://tianqiapi.com/api?version=v6&appid=62884591&appsecret=RktG3jTx'
+    weather = requests.get(weather_url).json()
+    city = weather['city']  # 城市
+    wea = weather['wea']  # 天气情况
+    tem = weather['tem']  # 平均气温
+    tem1 = weather['tem1']  # 最高气温
+    tem2 = weather['tem2']  # 最低气温
+    win = weather['win']  # 风向
+    air_level = weather['air_level']  # 空气质量
+    air_tips = weather['air_tips']  # tips
+    h = f'''
+        <!DOCTYPE HTML>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>天气订阅</title>
+        </head>
+        <body>
+            <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1846888102,1087843010&fm=26&gp=0.jpg" height=150 width=300/></p>
+            城市: {city} <br>
+            天气情况: {wea} <br>
+            平均气温: {tem}℃ <br>
+            最高气温: {tem1}℃ <br>
+            最低气温: {tem2}℃ <br>
+            风向: {win} <br>
+            空气质量: {air_level} <br>
+            tips: {air_tips} <br>
+        </body>
+        </html>
+        '''
+    send_mail('打卡提醒', 'message', '117645743@qq.com', ['937471204@qq.com'], fail_silently=False, html_message=h)
+
+
 # 更新访问者信息
 def update_vistor():
     vistor_list = Vistor.objects.filter(count=3, country='')
