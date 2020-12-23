@@ -10,9 +10,9 @@ def send_email():
     print(res)
 
 
-def send_weather(request):
-    ip = get_user_ip(request)
-    weather_url = f'https://tianqiapi.com/api?version=v6&ip={ip}&appid=62884591&appsecret=RktG3jTx'
+def send_weather():
+    # ip = get_user_ip(request)
+    weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
     weather = requests.get(weather_url, timeout=5).json()
     city = weather['city']  # 城市
     wea = weather['wea']  # 天气情况
