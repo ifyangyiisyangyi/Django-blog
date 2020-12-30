@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
 
+from tool.models import Linkage
+
 
 def Toolview(request):
     return render(request, 'tool/tool.html')
@@ -51,4 +53,5 @@ def link_show(request):
     '''
     常用链接
     '''
-    return render(request, 'tool/link_show.html')
+    linkages = Linkage.objects.all()
+    return render(request, 'tool/link_show.html', {'linkages': linkages})

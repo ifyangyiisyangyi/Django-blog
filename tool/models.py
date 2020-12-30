@@ -30,3 +30,30 @@ class ToolLink(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Linkage(models.Model):
+    name = models.CharField(verbose_name='网站名称', max_length=60)
+    link = models.URLField(verbose_name='网站链接')
+    clicks = models.IntegerField(verbose_name='点击数', default=0)
+    is_top = models.BooleanField(verbose_name='置顶', default=False)
+    create_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    update_time = models.DateTimeField(verbose_name="更新时间", auto_now_add=True)
+
+    class Meta:
+        verbose_name = '常用链接'
+        verbose_name_plural = verbose_name
+        ordering = ['-clicks']
+
+    def __str__(self):
+        return self.name[:20]
+
+    def update_clicks(self):
+        self.clicks += 1
+        self.save(update_fields=['clicks'])
+
+    def get_pre(self):
+        return Linkage.objects.filter(id__lt=self.id).order_by('-id').first()
+
+    def get_next(self):
+        return Linkage.objects.filter(id__gt=self.id).order_by('id').first()
