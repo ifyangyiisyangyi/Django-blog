@@ -25,6 +25,12 @@ IZONE_TOOLS = {
                 'url': 'tool:mock',
                 'img': 'editor/images/logos/mock.png',
                 'desc': '在线mock工具'
+            },
+            {
+                'name': '常用链接',
+                'url': 'tool:link_show',
+                'img': 'editor/images/logos/link_show.png',
+                'desc': '常用链接'
             }
         ]
     }

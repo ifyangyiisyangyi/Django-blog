@@ -45,3 +45,10 @@ def mock(request):
     # if request.method == 'POST':
     #     return render(request, 'tool/mock.html', context={'mockUrl': 'xxx/xxx'})
     return render(request, 'tool/mock.html')
+
+
+def link_show(request):
+    '''
+    常用链接
+    '''
+    return render(request, 'tool/link_show.html')
