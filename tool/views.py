@@ -1,4 +1,5 @@
 # Create your views here.
+import requests
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
@@ -55,3 +56,9 @@ def link_show(request):
     '''
     linkages = Linkage.objects.all()
     return render(request, 'tool/link_show.html', {'linkages': linkages})
+
+
+def get_weather(request):
+    weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
+    weather = requests.get(weather_url, timeout=5).json()
+    return render(request, 'tool/get_weather.html', {'weather':weather})

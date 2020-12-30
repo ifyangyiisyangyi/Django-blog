@@ -4,7 +4,7 @@ from django.db.models.aggregates import Count
 from django.templatetags.static import static
 from django.urls import reverse
 
-from ..models import ToolCategory, ToolLink
+from ..models import ToolCategory
 from ..utils import IZONE_TOOLS
 
 register = template.Library()

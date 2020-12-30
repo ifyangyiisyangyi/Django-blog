@@ -1,0 +1,29 @@
+{% extends "tool/base_tool.html" %}
+{% load static %}
+
+{% block head_title %}获取天气{% endblock %}
+{% block metas %}
+<meta name="description" content="获取天气">
+<meta name="keywords" content="获取天气">
+{% endblock %}
+
+{% block tool_name %}获取天气{% endblock %}
+{% block left_content %}
+
+<div>
+    城市: {{ weather.city }} <br>
+    天气情况: {{ weather.wea }} <br>
+    平均气温: {{ weather.tem }}℃ <br>
+    最高气温: {{ weather.tem1 }}℃ <br>
+    最低气温: {{ weather.tem2 }}℃ <br>
+    风向: {{ weather.win }} <br>
+    风力等级: {{ weather.win_speed }} <br>
+    风速: {{ weather.win_meter }} <br>
+    空气质量: {{ weather.air_level }} <br>
+    tips: {{ weather.air_tips }} <br>
+</div>
+{% endblock %}
+
+{% block end_f %}
+
+{% endblock %}

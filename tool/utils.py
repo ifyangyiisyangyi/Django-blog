@@ -31,6 +31,12 @@ IZONE_TOOLS = {
                 'url': 'tool:link_show',
                 'img': 'editor/images/logos/link_show.png',
                 'desc': '常用链接'
+            },
+            {
+                'name': '获取天气',
+                'url': 'tool:get_weather',
+                'img': 'editor/images/logos/get_weather.png',
+                'desc': '获取天气'
             }
         ]
     }
