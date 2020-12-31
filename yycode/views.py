@@ -1,4 +1,3 @@
-
 import requests
 from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.forms import model_to_dict
@@ -6,7 +5,6 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from TestModel.models import Message, Blog, Vistor, spider_article
 from django.http import HttpResponseRedirect
-from django.core.mail import send_mail
 
 
 def show_404(request):
@@ -123,5 +121,3 @@ def article_show(request):
             articles = paginator.page(paginator.num_pages)
 
     return render(request, 'article_show.html', {'articles': articles})
-
-
