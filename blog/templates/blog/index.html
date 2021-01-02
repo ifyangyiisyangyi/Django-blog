@@ -14,7 +14,7 @@
 
 <!--            </div>-->
             {% load_article_summary articles %}
-
+            {% if is_paginated %}{% load_pages %}{% endif %}
 
         </div>
 

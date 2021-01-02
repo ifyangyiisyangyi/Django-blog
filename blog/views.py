@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'articles'
-    paginate_by = getattr(settings, 'BASE_PAGE_BY', None)
+    paginate_by = getattr(settings, 'BASE_PAGE_BY', 10)
     paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
 
     def get_ordering(self):
