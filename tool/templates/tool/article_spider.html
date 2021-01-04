@@ -1,0 +1,48 @@
+{% extends "tool/base_tool.html" %}
+{% load static %}
+
+{% block head_title %}python爬虫{% endblock %}
+{% block metas %}
+<meta name="description" content="python爬虫">
+<meta name="keywords" content="python爬虫">
+{% endblock %}
+
+{% block left_content %}
+<div class="text-left">
+    <table class="table">
+        <thead>
+        <tr>
+            <th><h3 style="text-align: center"><strong>ID</strong></h3></th>
+            <th><h3 style="text-align: center"><strong>文章</strong</h3></th>
+        </tr>
+        </thead>
+        {% for article in articles %}
+        <tbody>
+        <tr>
+            <td><a style="text-align: center">{{ article.id }}</a></td>
+            <td><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div id="pages" class="text-left">
+        <nav>
+            <ul class="pagination">
+                <li class="step-links">
+                    {% if articles.has_previous %}
+                    <a class='active' href="?page={{ articles.previous_page_number }}">上一页</a>
+                    {% endif %}
+
+                    <span class="current">
+                        {{ articles.number }} / {{ articles.paginator.num_pages }}</span>
+
+                    {% if articles.has_next %}
+                    <a class='active' href="?page={{ articles.next_page_number }}">下一页</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+

@@ -26,18 +26,11 @@
     </div>
 </div>
 <script>
-function fun() {
-    var res = document.getElementById("name")
-    var commdty_code = res.value
-    var len = commdty_code.toString().length;
-    while(len < 18){
-        commdty_code = '0' + commdty_code;
-        len++;
-    }
+function fun(){
+    var res = document.getElementById("name").value
+    const commdty_code = res.padStart('18', 0)
     document.getElementById("myDiv").innerHTML= commdty_code;
 }
-
-
 
 </script>
 {% endblock %}

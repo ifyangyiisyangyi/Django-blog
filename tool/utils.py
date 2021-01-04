@@ -37,6 +37,12 @@ IZONE_TOOLS = {
                 'url': 'tool:get_weather',
                 'img': 'editor/images/logos/get_weather.png',
                 'desc': '获取天气'
+            },
+            {
+                'name': '爬虫',
+                'url': 'tool:article_spider',
+                'img': 'editor/images/logos/article_spider.png',
+                'desc': '爬取python文章'
             }
         ]
     }

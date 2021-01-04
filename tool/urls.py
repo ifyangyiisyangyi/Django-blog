@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import Cbvdemo, Toolview, commdty_code_make_up, sub_table, mock, link_show, get_weather
+
+from .views import Cbvdemo, Toolview, commdty_code_make_up, sub_table, mock, link_show, get_weather, article_spider
 
 app_name = 'tool'
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('mock', mock, name='mock'),  # 在线mock工具
     path('link_show', link_show, name='link_show'),  # 常用链接
     path('get_weather', get_weather, name='get_weather'),  # 获取天气
+    path('article_spider', article_spider, name='article_spider'),  # 爬虫列表
+
 ]
