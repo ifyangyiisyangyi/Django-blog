@@ -49,7 +49,7 @@ class DetailView(generic.DetailView):
                     ses[the_key] = time.time()
         # 获取文章更新的时间，判断是否从缓存中取文章的markdown,可以避免每次都转换
         ud = obj.update_date.strftime("%Y%m%d%H%M%S")
-        md_key = '{}_md_{}'.format(obj.id, ud)
+        md_key = '{}_md_{}'.format(obj.slug, ud)
         cache_md = cache.get(md_key)
         if cache_md:
             # print("从缓存取出")
