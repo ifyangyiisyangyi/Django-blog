@@ -12,18 +12,24 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th><h3 style="text-align: center"><strong>名称</strong></h3></th>
-        <th><h3 style="text-align: center"><strong>链接</strong</h3></th>
-    </tr>
+        <tr>
+            <th>
+                <h3 style="text-align: center"><strong>名称</strong></h3>
+            </th>
+            <th>
+                <h3 style="text-align: center"><strong>链接</strong< /h3>
+            </th>
+        </tr>
     </thead>
     {% for linkage in linkages %}
     <tbody>
-    <tr>
-        <td><h5 style="text-align: center">{{ linkage.name }}</h5></td>
-        <td><a href="{{ linkage.link }}" target="_blank">{{ linkage.link }}</a></td>
-    </tr>
-    {% endfor %}
+        <tr>
+            <td>
+                <h5 style="text-align: center">{{ linkage.name }}</h5>
+            </td>
+            <td><a href="{{ linkage.link }}" target="_blank">{{ linkage.link }}</a></td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

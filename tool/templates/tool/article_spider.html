@@ -11,18 +11,22 @@
 <div class="text-left">
     <table class="table">
         <thead>
-        <tr>
-            <th><h3 style="text-align: center"><strong>ID</strong></h3></th>
-            <th><h3 style="text-align: center"><strong>文章</strong</h3></th>
-        </tr>
+            <tr>
+                <th>
+                    <h3 style="text-align: center"><strong>ID</strong></h3>
+                </th>
+                <th>
+                    <h3 style="text-align: center"><strong>文章</strong></h3>
+                </th>
+            </tr>
         </thead>
         {% for article in articles %}
         <tbody>
-        <tr>
-            <td><a style="text-align: center">{{ article.id }}</a></td>
-            <td><a href="{{ article.linkage }}" target="_blank">{{ article.title }}</a></td>
-        </tr>
-        {% endfor %}
+            <tr>
+                <td><a style="text-align: center">{{ article.id }}</a></td>
+                <td><a href="{{ article.linkage }}" target="_blank">{{ article.title }}</a></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div id="pages" class="text-left">
@@ -45,4 +49,3 @@
     </div>
 </div>
 {% endblock %}
-

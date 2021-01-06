@@ -12,9 +12,7 @@
 <div class="mb-3">
     <div class="form-group">
         <label>输入会员编码：</label>
-        <input class="form-control rounded-0" id="name"
-               placeholder="例：7018376435"
-               required>
+        <input class="form-control rounded-0" id="name" placeholder="例：7018376435" required>
         <small class="form-text text-muted">注：会员编码%64</small>
     </div>
     <button type="button" class="btn btn-info btn-sm rounded-0" onclick="fun()">开始计算</button>
@@ -26,11 +24,11 @@
     </div>
 </div>
 <script>
-function fun() {
-    var res = document.getElementById("name")
-    var sub_table = res.value % 64
-    document.getElementById("myDiv").innerHTML= sub_table;
-}
+    function fun() {
+        var res = document.getElementById("name")
+        var sub_table = res.value % 64
+        document.getElementById("myDiv").innerHTML = sub_table;
+    }
 
 
 </script>
