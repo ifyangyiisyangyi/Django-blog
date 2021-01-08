@@ -1,8 +1,6 @@
 import requests
 from django.core.mail import send_mail
 from TestModel.models import Vistor
-from yycode.views import get_user_ip
-
 
 def send_email():
     res = send_mail('打卡提醒助手', "记得打卡哦~", '117645743@qq.com',
