@@ -56,7 +56,7 @@ class DetailView(generic.DetailView):
         md_key = '{}_md_{}'.format(obj.slug, ud)
         cache_md = cache.get(md_key)
         if cache_md:
-            # print("从缓存取出")
+            log.info(f'从缓存中取出 : {cache_md}')
             obj.body, obj.toc = cache_md
         else:
             md = markdown.Markdown(extensions=[
