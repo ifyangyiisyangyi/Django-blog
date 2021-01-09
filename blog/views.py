@@ -1,3 +1,4 @@
+import logging
 import time
 import markdown
 from django.conf import settings
@@ -9,6 +10,8 @@ from TestModel.models import Vistor
 from blog.models import Article, Category, Tag
 from yycode.settings import NEVER_REDIS_TIMEOUT
 
+log = logging.getLogger(name='blog')
+
 
 class IndexView(generic.ListView):
     model = Article
@@ -18,6 +21,7 @@ class IndexView(generic.ListView):
     paginate_orphans = getattr(settings, 'BASE_ORPHANS', 0)
 
     def get_ordering(self):
+        log.info(f'******请求header****** : {self.request.META}')
         save_vistor(self.request)  # 保存访问者ip
         sort = self.kwargs.get('sort')
         if sort == 'v':
@@ -132,13 +136,16 @@ def save_vistor(request):
         else:
             ip = request.META['REMOTE_ADDR']
         if ip == '127.0.0.1':
-            print("本地请求")
+            pass
         else:
             if "HTTP_USER_AGENT" in request.META:
                 user_agent = request.META['HTTP_USER_AGENT']
             else:
                 user_agent = ""
             vistor = Vistor(ip=ip, user_agent=user_agent, count=3)
+            log.info(f'ip && user_agent : {vistor.ip} && {vistor.user_agent}')
+            if ',' in vistor.ip:
+                log.error(f'异常IP : {vistor.ip}')
             vistor.save()
     except:
         print("保存ip失败！")
