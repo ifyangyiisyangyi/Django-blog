@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from django.http import JsonResponse
 
 from TestModel.models import spider_article
+from blog.views import log
 
 
 def get_article_page(url):
@@ -14,11 +15,15 @@ def get_article_page(url):
     for tag in ls:
         s = 'https://cloud.tencent.com' + tag.a['href']
         title = tag.a.string
-        print(f': {title}')
-        article = spider_article(title=title,
-                                 linkage=s,
-                                 tag="python")
-        article.save()
+        obj = spider_article.objects.filter(title=title).first()  # 查询文章是否已存在
+        if obj == None:
+            article = spider_article(title=title,
+                                     linkage=s,
+                                     tag="python")
+            article.save()
+            log.info(f'保存文章 --> {title}')
+        else:
+            log.info(f'已存在文章 --> {title}')
         url_dict[title] = s  # 返回文章的标题和链接
     return url_dict
 
@@ -27,7 +32,7 @@ def article_spider(request):
     url_dict = {}
     for i in range(30):
         url = 'https://cloud.tencent.com/developer/column/5263/page-' + str(i + 1)
-        print(f'爬取第{i + 1}页')
+        log.info(f'-------------------->> 抓取第{i + 1}页')
         url_sigle_dict = get_article_page(url)
         url_dict = dict(url_dict, **url_sigle_dict)
     return JsonResponse(url_dict)

@@ -148,4 +148,4 @@ def save_vistor(request):
                 log.error(f'异常IP : {vistor.ip}')
             vistor.save()
     except:
-        print("保存ip失败！")
+        log.error("保存ip失败！")
