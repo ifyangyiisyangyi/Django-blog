@@ -136,7 +136,7 @@ def save_vistor(request):
         else:
             ip = request.META['REMOTE_ADDR']
         if ip == '127.0.0.1':
-            pass
+            log.info(f'本地请求 --> {ip}')
         else:
             if "HTTP_USER_AGENT" in request.META:
                 user_agent = request.META['HTTP_USER_AGENT']

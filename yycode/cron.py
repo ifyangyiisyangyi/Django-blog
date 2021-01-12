@@ -1,6 +1,9 @@
+import re
 import requests
 from django.core.mail import send_mail
 from TestModel.models import Vistor
+from blog.views import log
+
 
 def send_email():
     res = send_mail('打卡提醒助手', "记得打卡哦~", '117645743@qq.com',
@@ -52,22 +55,21 @@ def send_weather():
 def update_vistor():
     vistor_list = Vistor.objects.filter(count=3, country='')
     for i in vistor_list:
-        # print(f'ip为 : {i.ip}')
-        url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
-        try:
+        if re.match(r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+                    i.ip):
+            url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
             res = requests.get(url, timeout=3)
             ip_message = res.json()
-            # print(ip_message)
+            log.info(f'解析IP响应结果 --> {ip_message}')
             if ip_message.get('status') == 'success':
                 i.country = ip_message.get('country')
                 i.city = ip_message.get('city')
                 i.ip_as = ip_message.get('as')
                 i.isp = ip_message.get('isp')
                 i.save()
-                # print("*******************保存成功******************")
             elif ip_message.get('status') == 'fail':
-                print("请求失败")
+                log.error(f"IP解析失败 --> {i.ip}")
             else:
-                pass
-        except:
-            print("未知异常")
+                log.error(f'解析异常 --> {i.ip}')
+        else:
+            log.error(f'无法解析异常IP --> {i.ip}')
