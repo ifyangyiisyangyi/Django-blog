@@ -109,7 +109,6 @@ def article_show(request):
         page = request.GET.get('page')  # 获取 url 后面的 page 参数的值, 首页不显示 page 参数, 默认值是 1
         try:
             articles = paginator.page(page)
-        # todo: 注意捕获异常
         except PageNotAnInteger:
             # 如果请求的页数不是整数, 返回第一页。
             articles = paginator.page(1)
