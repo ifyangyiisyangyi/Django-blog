@@ -5,14 +5,33 @@ from TestModel.models import Vistor
 from blog.views import log
 
 
-def send_email():
-    res = send_mail('打卡提醒助手', "记得打卡哦~", '117645743@qq.com',
-                    ['ifyangyiisyangyi@163.com', '937471204@qq.com', '506039913@qq.com'])
-    print(res)
+def daily_reminder():
+    '''
+    周一至周五日报提醒
+    '''
+    html = '''
+        <!DOCTYPE HTML>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>天气订阅</title>
+        </head>
+        <body>
+            <div>
+                <iframe scrolling="no"
+                src="https://tianqiapi.com/api.php?style=tk&skin=peach&align=right&paddingtop=5&paddingleft=5&fontsize=300"
+                frameborder="0" width="260" height="195" allowtransparency="true"></iframe><br>
+            </div>
+        </body>
+        </html>
+        '''
+    send_mail('日报提醒', '写日报了咩？', '117645743@qq.com', ['937471204@qq.com'], fail_silently=False, html_message=html)
 
 
 def send_weather():
-    # ip = get_user_ip(request)
+    """
+    周一至周五上下班打卡提醒
+    """
     weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
     weather = requests.get(weather_url, timeout=5).json()
     city = weather['city']  # 城市
