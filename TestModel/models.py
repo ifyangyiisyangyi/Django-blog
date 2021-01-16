@@ -29,6 +29,11 @@ class spider_article(models.Model):
     create_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
     update_time = models.DateTimeField(verbose_name="更新时间", auto_now_add=True)
 
+    class Meta:
+        ordering = ["create_time"]
+        verbose_name = "python文章"
+        verbose_name_plural = "python文章"
+
 
 class Vistor(models.Model):
     '''访问者'''
@@ -41,3 +46,26 @@ class Vistor(models.Model):
     count = models.IntegerField(verbose_name="访问次数", default=0)
     create_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
     update_time = models.DateTimeField(verbose_name="更新时间", auto_now_add=True)
+
+
+# 用户表
+class User(models.Model):
+    gender = (
+        ('mail', "男"),
+        ('female', "女")
+    )
+
+    user_name = models.CharField(max_length=128, unique=True)  # 用户名，唯一
+    password = models.CharField(max_length=256)
+    email = models.EmailField(unique=True)  # 内置邮箱类型，唯一
+    sex = models.CharField(max_length=32, choices=gender, default="男")  # 性别只能选男或女，默认男
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):  # 人性化显示对象信息
+        return self.user_name
+
+    class Meta:
+        ordering = ["create_time"]
+        verbose_name = "用户"
+        verbose_name_plural = "用户"
