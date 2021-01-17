@@ -1,6 +1,5 @@
 # models.py
 # -*-coding:UTF-8-*-
-from django import forms
 from django.db import models
 
 
@@ -70,9 +69,3 @@ class User(models.Model):
         ordering = ["create_time"]
         verbose_name = "用户"
         verbose_name_plural = "用户"
-
-
-# 表单模型
-class UserForm(forms.Form):
-    username = forms.CharField(label="用户名", max_length=128)
-    password = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput)
