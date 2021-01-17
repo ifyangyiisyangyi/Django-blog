@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from TestModel.models import User
+from TestModel.models import User, UserForm
 
 
 def show_404(request):
@@ -13,18 +13,22 @@ def index(request):
 
 def login(request):
     if request.method == "POST":
-        user_name = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        print(user_name)
-        if user_name and password:  # 确保用户名和密码都不为空
-            user_name = user_name.strip()
+        login_form = UserForm(request.POST)
+        message = "请检查填写的内容"
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
             try:
-                user = User.objects.get(user_name=user_name)
+                user = User.objects.get(user_name=username)
+                if user.password == password:
+                    return redirect('/')
+                else:
+                    message = "密码不正确！"
             except:
-                return render(request, 'login.html')
-            if user.password == password:
-                return redirect('/')
-    return render(request, 'login.html')
+                message = "用户不存在！"
+        return render(request, 'login.html', locals())
+    login_form = UserForm()
+    return render(request, 'login.html', locals())
 
 
 def register(request):

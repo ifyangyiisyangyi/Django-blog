@@ -8,16 +8,9 @@
             {% include 'blog/tags/base_right.html' %}
         </div>
         <div class="col-lg-8">
-
-<!--            <div class="text-secondary font-weight-bold py-2 f-15 choice">-->
-
-
-<!--            </div>-->
             {% load_article_summary articles %}
             {% if is_paginated %}{% load_pages %}{% endif %}
-
         </div>
-
     </div>
 </div>
 {% endblock %}
