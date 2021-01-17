@@ -8,7 +8,8 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('tool/', include('tool.urls')),
     path('article_spider/', spider.article_spider),
-    path('login/', views.login),
+    path('login/', views.login),  # 登录
+    path('register', views.register),  # 注册
     path('captcha/', include('captcha.urls')),  # 图形验证码路由
 ]
 
