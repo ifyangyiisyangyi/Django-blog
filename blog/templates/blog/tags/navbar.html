@@ -7,25 +7,44 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item mr-2">
                 {% url 'blog:index' as index_url %}
-                <a class="nav-link py-md-3 {% if request.path == index_url %}active{% endif %}" href="{{ index_url }}"><i class="fa fa-home mr-1"></i>首页<span class="sr-only">(current)</span></a>
+                <a class="nav-link py-md-3 {% if request.path == index_url %}active{% endif %}"
+                   href="{{ index_url }}"><i class="fa fa-home mr-1"></i>首页<span class="sr-only">(current)</span></a>
             </li>
+
             <li class="nav-item mr-2">
                 {% url 'tool:total' as tool_url %}
-                <a class="nav-link py-md-3 {% if request.resolver_match.namespace == 'tool' %}active{% endif %}" href="{{ tool_url }}"><i class="fa fa-wrench mr-1"></i>小工具</a>
+                <a class="nav-link py-md-3 {% if request.resolver_match.namespace == 'tool' %}active{% endif %}"
+                   href="{{ tool_url }}"><i class="fa fa-wrench mr-1"></i>小工具</a>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform"
-                  action="#">
-                <div class="input-group">
-                    <input type="search" name="q" class="form-control rounded-0" placeholder="站内搜索" autocomplete="off"
-                           required=True>
-                    <div class="input-group-btn">
-                        <button class="btn btn-info rounded-0" type="submit"><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
+<!--        <ul class="navbar-nav ml-auto">-->
+<!--            <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get" id="searchform"-->
+<!--                  action="#">-->
+<!--                <div class="input-group">-->
+<!--                    <input type="search" name="q" class="form-control rounded-0" placeholder="站内搜索" autocomplete="off"-->
+<!--                           required=True>-->
+<!--                    <div class="input-group-btn">-->
+<!--                        <button class="btn btn-info rounded-0" type="submit"><i class="fa fa-search"></i></button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </ul>-->
+        <ul class="navbar-nav">
+            {% if request.session.is_login %}
+                <li class="nav-item mr-2">
+                    <a>{{ request.session.user_name }}</a>
+                </li>
+                <li>
+                    <a href="/logout">退出</a>
+                </li>
+            {% else %}
+                <li class="nav-item mr-2">
+                    <a class="nav-link py-md-3" href="/login">登录</a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link py-md-3" href="/register">注册</a>
+                </li>
+            {% endif %}
         </ul>
-
     </div>
 </nav>

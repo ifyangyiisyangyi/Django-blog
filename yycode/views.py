@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect
 from TestModel.models import User
 from TestModel.forms import UserForm
+from blog.views import log
 
 
 def show_404(request):
     return render(request, '404.html')
 
 
-def index(request):
-    pass
-    return render(request, 'index.html')
-
-
+# 登录
 def login(request):
+    # 不允许重复登录
+    res = request.session.get('is_login')
+    log.debug(f'request session  --> {res}')
+    if request.session.get('is_login', None):
+        return redirect('/')
+
     if request.method == "POST":
         login_form = UserForm(request.POST)
         message = "请检查填写的内容"
@@ -22,6 +25,11 @@ def login(request):
             try:
                 user = User.objects.get(user_name=username)
                 if user.password == password:
+                    # 往session字典内写入用户状态和数据
+                    request.session['is_login'] = True
+                    request.session['user_id'] = user.id
+                    request.session['user_name'] = user.user_name
+                    log.info(request.session['user_name'])
                     return redirect('/')
                 else:
                     message = "密码不正确！"
@@ -43,6 +51,9 @@ def register(request):
     return render(request, 'register.html')
 
 
+# 登出
 def logout(request):
-    pass
-    return render(request, 'logout.html')
+    if not request.session.get('is_login', None):
+        return redirect('/')
+    request.session.flush()
+    return redirect('/')
