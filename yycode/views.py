@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from TestModel.models import User
-from TestModel.forms import UserForm
+from TestModel.forms import UserForm, RegisterForm
 from blog.views import log
 
 
@@ -47,8 +47,42 @@ def login(request):
 
 
 def register(request):
-    pass
-    return render(request, 'register.html')
+    if request.session.get('is_login', None):
+        return redirect('/')
+    if request.method == "POST":
+        log.debug('--> post')
+        register_form = RegisterForm(request.POST)
+        # log.info(register_form)
+        message = '请检查填写的内容'
+        if register_form.is_valid():
+            username = register_form.cleaned_data['username']
+            password1 = register_form.cleaned_data['password1']
+            password2 = register_form.cleaned_data['password2']
+            email = register_form.cleaned_data['email']
+            sex = register_form.cleaned_data['sex']
+            if password1 != password2:
+                message = '两次输入的密码不同'
+                return render(request, 'register.html', locals())
+            else:
+                same_username = User.objects.filter(user_name=username)
+                if same_username:
+                    message = "用户名已存在"
+                    return render(request, 'register.html', locals())
+                same_mail = User.objects.filter(email=email)
+                if same_mail:
+                    message = "邮箱已存在"
+                    return render(request, 'register.html', locals())
+                new_user = User(
+                    user_name=username,
+                    password=password1,
+                    email=email,
+                    sex=sex
+                )
+                log.info(sex)
+                new_user.save()
+                return redirect('/login/')
+    register_form = RegisterForm()
+    return render(request, 'register.html', locals())
 
 
 # 登出

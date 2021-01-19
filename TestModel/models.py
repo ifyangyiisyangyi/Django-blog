@@ -51,7 +51,7 @@ class Vistor(models.Model):
 # 用户表
 class User(models.Model):
     gender = (
-        ('mail', "男"),
+        ('male', "男"),
         ('female', "女")
     )
 

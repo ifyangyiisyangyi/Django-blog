@@ -10,7 +10,7 @@ urlpatterns = [
     path('article_spider/', spider.article_spider),
     path('login/', views.login),  # 登录
     path('logout', views.logout),  # 登出
-    path('register', views.register),  # 注册
+    path('register/', views.register),  # 注册
     path('captcha/', include('captcha.urls')),  # 图形验证码路由
 ]
 
