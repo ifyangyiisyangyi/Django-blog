@@ -14,13 +14,11 @@ def daily_reminder():
         <html>
         <head>
             <meta charset="UTF-8">
-            <title>天气订阅</title>
+            <title>日报提醒</title>
         </head>
         <body>
             <div>
-                <iframe scrolling="no"
-                src="https://tianqiapi.com/api.php?style=tk&skin=peach&align=right&paddingtop=5&paddingleft=5&fontsize=300"
-                frameborder="0" width="260" height="195" allowtransparency="true"></iframe><br>
+            <h1>写日报了咩?</h1>
             </div>
         </body>
         </html>

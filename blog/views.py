@@ -3,6 +3,7 @@ import time
 import markdown
 from django.conf import settings
 from django.core.cache import cache
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from markdown.extensions.toc import TocExtension, slugify
@@ -146,6 +147,12 @@ def save_vistor(request):
             log.info(f'ip && user_agent : {vistor.ip} && {vistor.user_agent}')
             if ',' in vistor.ip:
                 log.error(f'异常IP : {vistor.ip}')
+                mail_reminder("异常IP", f'异常ip --> {vistor.ip}')
             vistor.save()
     except:
         log.error("保存ip失败！")
+
+
+# 通用邮件提醒
+def mail_reminder(sub, mes):
+    send_mail(sub, mes, '117645743@qq.com', ['937471204@qq.com'])
