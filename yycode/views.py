@@ -1,3 +1,5 @@
+import hashlib
+
 from django.shortcuts import render, redirect
 from TestModel.models import User
 from TestModel.forms import UserForm, RegisterForm
@@ -24,7 +26,7 @@ def login(request):
             password = login_form.cleaned_data['password']
             try:
                 user = User.objects.get(user_name=username)
-                if user.password == password:
+                if user.password == md5_code(password):
                     # 往session字典内写入用户状态和数据
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
@@ -74,7 +76,7 @@ def register(request):
                     return render(request, 'register.html', locals())
                 new_user = User(
                     user_name=username,
-                    password=password1,
+                    password=md5_code(password1),  # 使用md5加密
                     email=email,
                     sex=sex
                 )
@@ -91,3 +93,18 @@ def logout(request):
         return redirect('/')
     request.session.flush()
     return redirect('/')
+
+
+# 密码哈希加密
+# def hash_code(s, salt='helloworld'):
+#     h = hashlib.sha256()
+#     s += salt
+#     h.update(s.encode())
+#     return h.hexdigest()
+
+
+# 密码md5加密
+def md5_code(s, salt='md5'):
+    s = (str(s) + salt).encode()
+    m = hashlib.md5(s)
+    return m.hexdigest()
