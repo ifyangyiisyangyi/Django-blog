@@ -57,7 +57,7 @@ class User(models.Model):
 
     user_name = models.CharField(max_length=128, unique=True)  # 用户名，唯一
     password = models.CharField(max_length=256)
-    email = models.EmailField(unique=True)  # 内置邮箱类型，唯一
+    email = models.EmailField(unique=True, help_text="邮箱")  # 内置邮箱类型，唯一
     sex = models.CharField(max_length=32, choices=gender, default="男")  # 性别只能选男或女，默认男
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now_add=True)
