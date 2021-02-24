@@ -1,9 +1,14 @@
+import datetime
 import hashlib
 
+from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect
+
+from TestModel import models
 from TestModel.models import User
 from TestModel.forms import UserForm, RegisterForm
 from blog.views import log
+from yycode import settings
 
 
 def show_404(request):
@@ -80,9 +85,11 @@ def register(request):
                     email=email,
                     sex=sex
                 )
-                log.info(sex)
                 new_user.save()
-                return redirect('/login/')
+                code = make_confirm_string(new_user)
+                send_register_mail(email, code)
+                message = "请前往注册邮箱，进行邮件确认"
+                return render(request, 'confirm.html', locals())  # 跳到邮件确认页
     register_form = RegisterForm()
     return render(request, 'register.html', locals())
 
@@ -108,3 +115,47 @@ def md5_code(s, salt='md5'):
     s = (str(s) + salt).encode()
     m = hashlib.md5(s)
     return m.hexdigest()
+
+
+def make_confirm_string(user):
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    code = md5_code(user.user_name, salt=now)
+    models.ConfirmString.objects.create(code=code, user=user, )
+
+    return code
+
+
+def send_register_mail(email, code):
+    subject, from_email = '测试邮件', '117645743@qq.com'
+    text_content = '欢迎注册'
+    html_content = '''
+                    <p>感谢注册<a href="http://{}/confirm/?code={}" target=blank>点击确认</a></p>
+                    <p>请点击站点链接完成注册确认！</p>
+                    <p>此链接有效期为{}天！</p>
+                    '''.format('yycode.com.cn', code, settings.CONFIRM_DAYS)
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [email])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+
+def user_confirm(request):
+    code = request.GET.get('code', None)
+    print(f'code --> {code}')
+    message = ""
+    try:
+        confirm = models.ConfirmString.objects.get(code=code)
+    except:
+        message = '无效的确认请求!'
+        return render(request, 'confirm.html', locals())
+    create_time = confirm.create_time
+    now = datetime.datetime.now()
+    if now > create_time + datetime.timedelta(settings.CONFIRM_DAYS):
+        confirm.user.delete()
+        message = '您的邮件已经过期！请重新注册!'
+        return render(request, 'confirm.html', locals())
+    else:
+        confirm.user.has_confirmed = True
+        confirm.user.save()
+        confirm.delete()
+        message = '感谢确认，请使用账户登录！'
+        return render(request, 'confirm.html', locals())

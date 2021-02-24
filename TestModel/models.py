@@ -61,11 +61,27 @@ class User(models.Model):
     sex = models.CharField(max_length=32, choices=gender, default="男")  # 性别只能选男或女，默认男
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now_add=True)
+    has_confirmed = models.BooleanField(default=False)  # 是否邮箱确认
 
     def __str__(self):  # 人性化显示对象信息
         return self.user_name
 
     class Meta:
-        ordering = ["create_time"]
+        ordering = ["-create_time"]
         verbose_name = "用户"
         verbose_name_plural = "用户"
+
+
+class ConfirmString(models.Model):
+    code = models.CharField(max_length=256)
+    user = models.OneToOneField('User', on_delete=models.DO_NOTHING)
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.name + ":   " + self.code
+
+    class Meta:
+        ordering = ["-create_time"]
+        verbose_name = "确认码"
+        verbose_name_plural = "确认码"

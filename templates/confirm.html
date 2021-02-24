@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block title %}注册邮件确认{% endblock %}
+
+{% block base_content %}
+<div class="container">
+    <div class="row justify-content-center" style="height: 500px">
+        <div class="align-self-center">
+            <h1 class="text-center">{{ message }}</h1>
+            <br>
+            <h3>10s后转到登录页...</h3>
+        </div>
+    </div>
+</div>
+<script>
+        window.setTimeout("window.location='/login/'",10000);
+</script>
+{% endblock %}
+
+
