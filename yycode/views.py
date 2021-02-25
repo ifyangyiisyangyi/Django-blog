@@ -31,6 +31,9 @@ def login(request):
             password = login_form.cleaned_data['password']
             try:
                 user = User.objects.get(user_name=username)
+                if user.has_confirmed == False:
+                    message = "用户还未邮件确认"
+                    return render(request, 'login.html', locals())
                 if user.password == md5_code(password):
                     # 往session字典内写入用户状态和数据
                     request.session['is_login'] = True
@@ -102,14 +105,6 @@ def logout(request):
     return redirect('/')
 
 
-# 密码哈希加密
-# def hash_code(s, salt='helloworld'):
-#     h = hashlib.sha256()
-#     s += salt
-#     h.update(s.encode())
-#     return h.hexdigest()
-
-
 # 密码md5加密
 def md5_code(s, salt='md5'):
     s = (str(s) + salt).encode()
@@ -121,12 +116,12 @@ def make_confirm_string(user):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = md5_code(user.user_name, salt=now)
     models.ConfirmString.objects.create(code=code, user=user, )
-
     return code
 
 
+# 发送注册邮件
 def send_register_mail(email, code):
-    subject, from_email = '测试邮件', '117645743@qq.com'
+    subject, from_email = '账号注册确认邮件', '117645743@qq.com'
     text_content = '欢迎注册'
     html_content = '''
                     <p>感谢注册<a href="http://{}/confirm/?code={}" target=blank>点击确认</a></p>
@@ -138,6 +133,7 @@ def send_register_mail(email, code):
     msg.send()
 
 
+# 注册邮件确认
 def user_confirm(request):
     code = request.GET.get('code', None)
     print(f'code --> {code}')
