@@ -17,6 +17,6 @@ class SpiderAticleAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("user_name", "email", "sex")
+    list_display = ("user_name", "email", "sex", "has_confirmed")
     search_fields = ("user_name",)
     list_filter = ("sex", "create_time")
