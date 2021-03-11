@@ -50,6 +50,8 @@ def get_weather(request):
     weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
     weather = requests.get(weather_url, timeout=5).json()
     return render(request, 'tool/get_weather.html', {'weather': weather})
+    return render(request, 'tool/get_weather.html', locals())
+
 
 
 def article_spider(request):
@@ -71,4 +73,5 @@ def article_spider(request):
         except EmptyPage:
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             articles = paginator.page(paginator.num_pages)
-    return render(request, 'tool/article_spider.html', {"articles": articles})
+    # return render(request, 'tool/article_spider.html', {"articles": articles})
+    return render(request, 'tool/article_spider.html', locals())
