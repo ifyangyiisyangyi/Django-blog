@@ -49,9 +49,8 @@ def get_weather(request):
     '''
     weather_url = f'https://tianqiapi.com/api?version=v6&cityid=101010100&appid=62884591&appsecret=RktG3jTx'
     weather = requests.get(weather_url, timeout=5).json()
-    return render(request, 'tool/get_weather.html', {'weather': weather})
+    # return render(request, 'tool/get_weather.html', {'weather': weather})
     return render(request, 'tool/get_weather.html', locals())
-
 
 
 def article_spider(request):
