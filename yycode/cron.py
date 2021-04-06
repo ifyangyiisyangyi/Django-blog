@@ -5,25 +5,25 @@ from TestModel.models import Vistor
 from blog.views import log
 
 
-def daily_reminder():
-    '''
-    周一至周五日报提醒
-    '''
-    html = '''
-        <!DOCTYPE HTML>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>日报提醒</title>
-        </head>
-        <body>
-            <div>
-            <h1>写日报了咩?</h1>
-            </div>
-        </body>
-        </html>
-        '''
-    send_mail('日报提醒', '写日报了咩？', '117645743@qq.com', ['937471204@qq.com'], fail_silently=False, html_message=html)
+# def daily_reminder():
+#     '''
+#     周一至周五日报提醒
+#     '''
+#     html = '''
+#         <!DOCTYPE HTML>
+#         <html>
+#         <head>
+#             <meta charset="UTF-8">
+#             <title>日报提醒</title>
+#         </head>
+#         <body>
+#             <div>
+#             <h1>写日报了咩?</h1>
+#             </div>
+#         </body>
+#         </html>
+#         '''
+#     send_mail('日报提醒', '写日报了咩？', '117645743@qq.com', ['937471204@qq.com'], fail_silently=False, html_message=html)
 
 
 def send_weather():
@@ -64,7 +64,7 @@ def send_weather():
         </body>
         </html>
         '''
-    send_mail('打卡提醒', 'message', '117645743@qq.com', ['937471204@qq.com', '506039913@qq.com'], fail_silently=False,
+    send_mail('打卡提醒', 'message', '117645743@qq.com', ['506039913@qq.com'], fail_silently=False,
               html_message=h)
 
 
