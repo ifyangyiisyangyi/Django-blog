@@ -30,9 +30,44 @@ def get_article_page(url):
 
 def article_spider(request):
     url_dict = {}
-    for i in range(30):
+    for i in range(3):
         url = 'https://cloud.tencent.com/developer/column/5263/page-' + str(i + 1)
-        log.info(f'-------------------->> 抓取第{i + 1}页')
+        # log.info(f'-------------------->> 抓取第{i + 1}页')
         url_sigle_dict = get_article_page(url)
+        url_dict = dict(url_dict, **url_sigle_dict)
+    return JsonResponse(url_dict)
+
+
+# 码霸霸
+
+def get_mababa_article_page(url):
+    r = requests.get(url=url)
+    html = r.text
+    print(html)
+    soup = BeautifulSoup(html, 'lxml')
+    ls = soup('article', class_="post")
+    url_dict = {}
+    for tag in ls:
+        title = tag.header.h2.a.string.strip()
+        s = tag.header.h2.a["href"]
+        obj = spider_article.objects.filter(title=title).first()  # 查询文章是否已存在
+        if obj == None:
+            article = spider_article(title=title,
+                                     linkage=s,
+                                     tag="java")
+            article.save()
+            log.info(f'保存文章 --> {title}')
+        else:
+            log.info(f'已存在文章 --> {title}')
+        url_dict[title] = s
+    return url_dict
+
+
+def mababa_spider(request):
+    url_dict = {}
+    for i in range(3):
+        url = 'https://blog.lupf.cn/?p=' + str(i + 1)
+        log.info(f'-------------------->> 抓取第{i + 1}页')
+        url_sigle_dict = get_mababa_article_page(url)
         url_dict = dict(url_dict, **url_sigle_dict)
     return JsonResponse(url_dict)
