@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('tool/', include('tool.urls')),
     path('article_spider/', spider.article_spider),
+    path("mababa_spider/", spider.mababa_spider),
     path('login/', views.login),  # 登录
     path('logout', views.logout),  # 登出
     path('register/', views.register),  # 注册
