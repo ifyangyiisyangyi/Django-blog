@@ -30,9 +30,9 @@ class spider_article(models.Model):
     update_time = models.DateTimeField(verbose_name="更新时间", auto_now_add=True)
 
     class Meta:
-        ordering = ["create_time"]
-        verbose_name = "python文章"
-        verbose_name_plural = "python文章"
+        ordering = ["-create_time"]
+        verbose_name = "文章"
+        verbose_name_plural = "文章"
 
 
 class Vistor(models.Model):
