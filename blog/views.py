@@ -133,9 +133,9 @@ def save_vistor(request):
     '''
     try:
         if 'HTTP_X_FORWARDED_FOR' in request.META:
-            ip = request.META['HTTP_X_FORWARDED_FOR']
+            ip = request.META['HTTP_X_FORWARDED_FOR'].split(',')[0]
         else:
-            ip = request.META['REMOTE_ADDR']
+            ip = request.META['REMOTE_ADDR'].split(',')[0]
         if ip == '127.0.0.1':
             log.info(f'本地请求 --> {ip}')
         else:
