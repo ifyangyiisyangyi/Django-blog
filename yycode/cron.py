@@ -64,7 +64,7 @@ def send_weather():
         </body>
         </html>
         '''
-    send_mail('打卡提醒', 'message', '117645743@qq.com', ['506039913@qq.com'], fail_silently=False,
+    send_mail('打卡提醒', 'message', '117645743@qq.com', [], fail_silently=False,
               html_message=h)
 
 
