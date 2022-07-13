@@ -55,8 +55,11 @@ def get_mababa_article_page(url):
             article = spider_article(title=title,
                                      linkage=s,
                                      tag="java")
-            article.save()
-            log.info(f'保存文章 --> {title}')
+            try:
+                article.save()
+                log.info(f'保存文章 --> {title}')
+            except:
+                log.info(f'存表异常 --> {title}')
         else:
             log.info(f'已存在文章 --> {title}')
         url_dict[title] = s
@@ -65,7 +68,7 @@ def get_mababa_article_page(url):
 
 def mababa_spider(request):
     url_dict = {}
-    for i in range(3):
+    for i in range(5):
         url = 'https://blog.lupf.cn/?p=' + str(i + 1)
         log.info(f'-------------------->> 抓取第{i + 1}页')
         url_sigle_dict = get_mababa_article_page(url)
