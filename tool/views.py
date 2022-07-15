@@ -1,4 +1,8 @@
 # Create your views here.
+import hashlib
+import base64
+
+
 import requests
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
 from django.http import JsonResponse, HttpResponse
@@ -74,3 +78,24 @@ def article_spider(request):
             articles = paginator.page(paginator.num_pages)
     # return render(request, 'tool/article_spider.html', {"articles": articles})
     return render(request, 'tool/article_spider.html', locals())
+
+
+def md5_func(request):
+    if request.method == "POST" :
+        str = request.POST.get("md5_str")
+        str_md5 = hashlib.md5(str.encode(encoding='utf-8')).hexdigest()
+    return render(request, 'tool/md5.html', locals())
+
+def base64_func(request):
+    if request.method == "POST" :
+        str1 = request.POST.get("base64_str")
+        print(str)
+        if str1 != None:
+            base64_str = str(base64.b64encode(str1.encode("utf-8")), 'utf-8')
+
+
+        de_str = request.POST.get("base64_str_de")
+        if de_str != None:
+            print(de_str)
+            base64_str_de = base64.b64decode(de_str).decode("utf-8")
+    return render(request, 'tool/base64.html', locals())

@@ -1,0 +1,53 @@
+{% extends "tool/base_tool.html" %}
+{% load static %}
+
+{% block head_title %}base64加密{% endblock %}
+{% block metas %}
+<meta name="description" content="base64加密">
+<meta name="keywords" content="base64加密">
+{% endblock %}
+
+{% block tool_name %}base64加密{% endblock %}
+{% block left_content %}
+<div class="mb-3">
+    <form method="post" action="">
+        <label>要加密的字符串:</label>
+        <input type="text" name="base64_str">
+        <input type="submit" value="加密">
+    </form>
+<!--    <button type="button" class="btn btn-info btn-sm rounded-0" onclick="fun()">加密</button>-->
+</div>
+<div class="card mb-0 rounded-0">
+    <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
+    <div class="card-body table-responsive push-result text-center p-2">
+        <div id="myDiv">{{ base64_str }}</div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class="mb-3">
+    <form method="post" action="">
+        <label>要解密的字符串:</label>
+        <input type="text" name="base64_str_de">
+        <input type="submit" value="解密">
+    </form>
+</div>
+<div class="card mb-0 rounded-0">
+    <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
+    <div class="card-body table-responsive push-result text-center p-2">
+        <div id="myDiv1">{{ base64_str_de }}</div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block end_f %}
+
+{% endblock %}

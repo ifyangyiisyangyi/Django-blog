@@ -43,6 +43,18 @@ IZONE_TOOLS = {
                 'url': 'tool:article_spider',
                 'img': 'editor/images/logos/article_spider.png',
                 'desc': '爬取python文章'
+            },
+            {
+                'name':'md5加密',
+                'url' : 'tool:md5',
+                'img' : 'editor/images/logos/md5.png',
+                'desc': 'md5加密'
+            },
+            {
+                'name': 'base64加密',
+                'url': 'tool:base64',
+                'img': 'editor/images/logos/base64.png',
+                'desc': 'base64加密'
             }
         ]
     }

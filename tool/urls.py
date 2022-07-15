@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import Toolview, commdty_code_make_up, sub_table, mock, link_show, get_weather, article_spider
+from .views import Toolview, commdty_code_make_up, sub_table, mock, link_show, get_weather, article_spider, md5_func,base64_func
 
 app_name = 'tool'
 urlpatterns = [
@@ -11,5 +11,7 @@ urlpatterns = [
     path('link_show', link_show, name='link_show'),  # 常用链接
     path('get_weather', get_weather, name='get_weather'),  # 获取天气
     path('article_spider', article_spider, name='article_spider'),  # 爬虫列表
+    path('md5', md5_func, name = 'md5'), # md5
+    path('base64', base64_func, name='base64'),  # base64
 
 ]

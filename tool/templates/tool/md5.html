@@ -1,0 +1,39 @@
+{% extends "tool/base_tool.html" %}
+{% load static %}
+
+{% block head_title %}md5加密{% endblock %}
+{% block metas %}
+<meta name="description" content="md5加密">
+<meta name="keywords" content="md5加密">
+{% endblock %}
+
+{% block tool_name %}md5加密{% endblock %}
+{% block left_content %}
+<div class="mb-3">
+    <form method="post" action="">
+        <label>要加密的字符串:</label>
+        <input type="text" name="md5_str">
+        <input type="submit" value="加密">
+    </form>
+<!--    <button type="button" class="btn btn-info btn-sm rounded-0" onclick="fun()">加密</button>-->
+</div>
+<div class="card mb-0 rounded-0">
+    <div class="card-header text-center text-info font-weight-bold py-2">结果</div>
+    <div class="card-body table-responsive push-result text-center p-2">
+        <div id="myDiv">{{ str_md5 }}</div>
+    </div>
+</div>
+<!--<script src="js/md5.min.js">-->
+<!--    function fun() {-->
+<!--        var res = document.getElementById("name")-->
+<!--        var md5_res = md5(res)-->
+<!--        document.getElementById("myDiv").innerHTML = md5_res;-->
+<!--    }-->
+
+
+<!--</script>-->
+{% endblock %}
+
+{% block end_f %}
+
+{% endblock %}
