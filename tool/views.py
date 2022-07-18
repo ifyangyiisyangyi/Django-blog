@@ -5,10 +5,11 @@ import base64
 
 import requests
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from TestModel.models import spider_article
 from tool.models import Linkage
+from yycode.settings import MOCK_ADDR
 
 
 def Toolview(request):
@@ -36,7 +37,11 @@ def mock(request):
     # print(f'**********   {request.method}   **********')
     # if request.method == 'POST':
     #     return render(request, 'tool/mock.html', context={'mockUrl': 'xxx/xxx'})
-    return render(request, 'tool/mock.html')
+    # return render(request, 'tool/mock.html')
+    if MOCK_ADDR == 1:
+        return render(request, 'tool/mock.html')
+    else:
+        return HttpResponseRedirect(MOCK_ADDR)
 
 
 def link_show(request):
@@ -99,3 +104,6 @@ def base64_func(request):
             print(de_str)
             base64_str_de = base64.b64decode(de_str).decode("utf-8")
     return render(request, 'tool/base64.html', locals())
+
+def job_func(request):
+    return render(request, 'tool/job.html', locals())

@@ -1,0 +1,31 @@
+{% extends "tool/base_tool.html" %}
+{% load static %}
+
+{% block head_title %}job{% endblock %}
+{% block metas %}
+<meta name="description" content="工作机会">
+<meta name="keywords" content="工作机会">
+{% endblock %}
+
+{% block tool_name %}工作机会{% endblock %}
+{% block left_content %}
+<div class="mb-3">
+    <form method="post" action="">
+        <label>搜索岗位:</label>
+        <input type="text" name="job_title">
+        <input type="submit" value="搜索">
+    </form>
+</div>
+
+
+<!--<div class="card mb-0 rounded-0">-->
+<!--    <div class="card-header text-center text-info font-weight-bold py-2">结果</div>-->
+<!--    <div class="card-body table-responsive push-result text-center p-2">-->
+<!--        <div id="myDiv">{{ str_md5 }}</div>-->
+<!--    </div>-->
+<!--</div>-->
+{% endblock %}
+
+{% block end_f %}
+
+{% endblock %}

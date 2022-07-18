@@ -55,6 +55,12 @@ IZONE_TOOLS = {
                 'url': 'tool:base64',
                 'img': 'editor/images/logos/base64.png',
                 'desc': 'base64加密'
+            },
+            {
+                'name': 'job',
+                'url': 'tool:job',
+                'img': 'editor/images/logos/job.png',
+                'desc': '工作机会'
             }
         ]
     }
