@@ -150,7 +150,7 @@ def save_vistor(request):
                 mail_reminder("异常IP", f'异常ip --> {vistor.ip}')
             vistor.save()
     except:
-        log.error("保存ip失败！")
+        log.error("保存ip失败!")
 
 
 # 通用邮件提醒
