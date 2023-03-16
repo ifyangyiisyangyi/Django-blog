@@ -5,3 +5,5 @@
 # Django-blog
 
 Django+bootstrap
+
+test
