@@ -57,3 +57,18 @@ class Linkage(models.Model):
 
     def get_next(self):
         return Linkage.objects.filter(id__gt=self.id).order_by('id').first()
+
+
+class Job(models.Model):
+    company_name = models.CharField(verbose_name='公司名称', max_length=200)
+    job_name = models.CharField(verbose_name='岗位', max_length=200)
+    salary = models.CharField(verbose_name='薪资', max_length=200)
+    welfare = models.CharField(verbose_name='福利', max_length=200)
+    experience = models.CharField(verbose_name='经验要求', max_length=200)
+    degree = models.CharField(verbose_name='学历要求', max_length=200)
+    excess = models.CharField(verbose_name='加分项目', max_length=200)
+    industry = models.CharField(verbose_name='所属行业', max_length=200)
+    addr = models.CharField(verbose_name='位置', max_length=200)
+    tag = models.CharField(verbose_name='标签', max_length=200)
+    create_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    update_time = models.DateTimeField(verbose_name="更新时间", auto_now_add=True)
