@@ -18,3 +18,4 @@ ADD requirements.txt /code/
 # 添加 pip 清华镜像源
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ADD . /code/
+RUN pip install gunicorn
