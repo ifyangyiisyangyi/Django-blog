@@ -60,7 +60,7 @@ IZONE_TOOLS = {
                 'name': 'job',
                 'url': 'tool:job',
                 'img': 'editor/images/logos/job.png',
-                'desc': '工作机会'
+                'desc': '招聘网站岗位信息'
             }
         ]
     }

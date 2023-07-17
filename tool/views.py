@@ -5,14 +5,14 @@ import base64
 
 import requests
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from TestModel.models import spider_article
-from tool.models import Linkage
+from tool.models import Linkage, Job
 from yycode.settings import MOCK_ADDR
 
 
-def Toolview(request):
+def toolview(request):
     return render(request, 'tool/tool.html')
 
 
@@ -94,16 +94,28 @@ def md5_func(request):
 def base64_func(request):
     if request.method == "POST" :
         str1 = request.POST.get("base64_str")
-        print(str)
-        if str1 != None:
-            base64_str = str(base64.b64encode(str1.encode("utf-8")), 'utf-8')
-
-
+        if str1:base64_str = str(base64.b64encode(str1.encode("utf-8")), 'utf-8')
         de_str = request.POST.get("base64_str_de")
-        if de_str != None:
-            print(de_str)
-            base64_str_de = base64.b64decode(de_str).decode("utf-8")
+        if de_str:base64_str_de = base64.b64decode(de_str).decode("utf-8")
     return render(request, 'tool/base64.html', locals())
 
 def job_func(request):
+    jobs = Job.objects.all().order_by("-create_time")[:10]
+    if request.method == "POST":
+        jobs = Job.objects.filter(tag__contains=request.POST.get("job")).order_by("-create_time")
+    job_list = [i for i in jobs]
+    paginator = Paginator(job_list, 12)
+    if request.method == "GET":
+        page = request.GET.get('page')  # 获取 url 后面的 page 参数的值, 首页不显示 page 参数, 默认值是 1
+        try:
+            jobs = paginator.page(page)
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            jobs = paginator.page(1)
+        except InvalidPage:
+            # 如果请求的页数不存在, 重定向页面
+            return HttpResponse('找不到页面的内容')
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            jobs = paginator.page(paginator.num_pages)
     return render(request, 'tool/job.html', locals())

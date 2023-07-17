@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tool.models import Linkage
+from tool.models import Linkage, Job
 
 
 # Register your models here.
@@ -12,3 +12,10 @@ class LinkageAdmin(admin.ModelAdmin):
     exclude = ('clicks',)
     list_display_links = ('name',)
     list_filter = ('create_time', 'is_top')
+
+@admin.register(Job)
+class JobAdmin(admin.ModelAdmin):
+    date_hierarchy = 'create_time'
+    list_display = ('id', 'company_name', 'job_name', 'salary')
+    list_display_links = ('company_name',)
+    list_filter = ('create_time',)

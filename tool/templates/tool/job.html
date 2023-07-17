@@ -3,27 +3,69 @@
 
 {% block head_title %}job{% endblock %}
 {% block metas %}
-<meta name="description" content="工作机会">
-<meta name="keywords" content="工作机会">
+<meta name="description" content="boss直聘爬虫">
+<meta name="keywords" content="boss直聘爬虫">
 {% endblock %}
 
 {% block tool_name %}工作机会{% endblock %}
 {% block left_content %}
-<div class="mb-3">
-    <form method="post" action="">
-        <label>搜索岗位:</label>
-        <input type="text" name="job_title">
-        <input type="submit" value="搜索">
-    </form>
+<div class="text-left">
+    <div class="mb-3">
+        <form method="POST" action="">
+            <label>搜索的岗位:</label>
+            <input type="text" name = "job">
+            <input type="submit" value="搜索">
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <h3 style="text-align: center"><strong>ID</strong></h3>
+                </th>
+                <th>
+                    <h3 style="text-align: center"><strong>公司名称</strong></h3>
+                </th>
+                <th>
+                    <h3 style="text-align: center"><strong>薪资</strong></h3>
+                </th>
+                <th>
+                    <h3 style="text-align: center"><strong>创建时间</strong></h3>
+                </th>
+            </tr>
+        </thead>
+        {% for job in jobs %}
+        <tbody>
+            <tr>
+                <td><a style="text-align: center">{{ job.id }}</a></td>
+                <td><a style="text-align: center">{{ job.company_name }}</a></td>
+                <td><a style="text-align: center">{{ job.salary }}</a></td>
+                <td><a style="text-align: center">{{ job.create_time }}</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div id="pages" class="text-left">
+        <nav>
+            <ul class="pagination">
+                <li class="step-links">
+                    {% if jobs.has_previous %}
+                    <a class='active' href="?page={{ jobs.previous_page_number }}">上一页</a>
+                    {% endif %}
+
+                    <span class="current">
+                        {{ jobs.number }} / {{ jobs.paginator.num_pages }}</span>
+
+                    {% if jobs.has_next %}
+                    <a class='active' href="?page={{ jobs.next_page_number }}">下一页</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
-
-<!--<div class="card mb-0 rounded-0">-->
-<!--    <div class="card-header text-center text-info font-weight-bold py-2">结果</div>-->
-<!--    <div class="card-body table-responsive push-result text-center p-2">-->
-<!--        <div id="myDiv">{{ str_md5 }}</div>-->
-<!--    </div>-->
-<!--</div>-->
 {% endblock %}
 
 {% block end_f %}
