@@ -74,7 +74,7 @@ def update_vistor():
     for i in vistor_list:
         if re.match(r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
                     i.ip):
-            url = f"http://www.ip-api.com/json/{i.ip}?lang=zh-CN"
+            url = f"http://www.ip-api.com/json/{i.ip}"
             res = requests.get(url, timeout=5)
             ip_message = res.json()
             log.info(f'解析IP响应结果 --> {ip_message}')
