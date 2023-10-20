@@ -85,10 +85,12 @@ def update_vistor():
                 i.isp = ip_message.get('isp')
                 i.save()
             elif ip_message.get('status') == 'fail':
-                log.error(f"IP解析失败 --> {i.ip}")
                 i.count = 0  # 解析失败的ip, count标记为0
                 i.save()
+                log.error(f"IP解析失败 --> {i.ip}, 将count置为0")
             else:
-                log.error(f'解析异常 --> {i.ip}')
+                i.count = 1  # 解析异常的ip, count标记为1
+                i.save()
+                log.error(f"IP解析异常 --> {i.ip}, 将count置为1")
         else:
             log.error(f'无法解析异常IP --> {i.ip}')
