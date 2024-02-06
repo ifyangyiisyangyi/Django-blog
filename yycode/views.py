@@ -155,3 +155,6 @@ def user_confirm(request):
         confirm.delete()
         message = '感谢确认，请使用账户登录！'
         return render(request, 'confirm.html', locals())
+
+def xiaoming(request):
+    return render(request, 'xiaoming.html', locals())
