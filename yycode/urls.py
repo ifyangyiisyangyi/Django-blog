@@ -14,7 +14,6 @@ urlpatterns = [
     path('register/', views.register),  # 注册
     path('captcha/', include('captcha.urls')),  # 图形验证码路由
     path('confirm/', views.user_confirm),  # 注册邮件确认
-    path('xiaoming', views.xiaoming),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
